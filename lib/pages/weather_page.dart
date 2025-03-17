@@ -49,141 +49,150 @@ class _WeatherPageState extends State<WeatherPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Weather App'),
-        backgroundColor: Colors.blueAccent,
-        centerTitle: true,
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFF2E3192), Color(0xFF1BFFFF)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.blue, Colors.purple],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          title: const Text(
+            'Weather App',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
           ),
-          padding: const EdgeInsets.all(20),
-          child: Center(
-            child: _isLoading
-                ? const CircularProgressIndicator(
-              color: Colors.white,
-            )
-                : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // Input for city name
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: TextField(
-                    controller: _cityController,
-                    decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white30,
-                      hintText: 'Enter City Name',
-                      hintStyle: TextStyle(color: Colors.white70),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(16),
                     ),
-                    style: const TextStyle(color: Colors.white),
-                    onChanged: (value) {
-                      setState(() {
-                        _cityName = value;
-                      });
-                    },
+                    child: Column(
+                      children: [
+                        TextField(
+                          controller: _cityController,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white.withOpacity(0.3),
+                            hintText: 'Enter City Name',
+                            hintStyle: const TextStyle(color: Colors.white70),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                          style: const TextStyle(color: Colors.white),
+                          onChanged: (value) {
+                            setState(() {
+                              _cityName = value;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        ElevatedButton(
+                          onPressed: _fetchWeather,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.purple,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 15,
+                              horizontal: 40,
+                            ),
+                          ),
+                          child: const Text(
+                            'Get Weather',
+                            style: TextStyle(fontSize: 18, color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-
-                // Button to fetch weather data
-                ElevatedButton(
-                  onPressed: _fetchWeather,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 15,
-                      horizontal: 40,
-                    ),
-                  ),
-                  child: const Text(
-                    'Get Weather',
-                    style: TextStyle(
-                      fontSize: 18,
+                  const SizedBox(height: 30),
+                  _isLoading
+                      ? const CircularProgressIndicator(color: Colors.white)
+                      : _errorMessage != null
+                      ? Text(
+                    _errorMessage!,
+                    style: const TextStyle(
+                      fontSize: 20,
                       color: Colors.white,
                     ),
-                  ),
-                ),
-
-                // Error or weather display
-                const SizedBox(height: 20),
-                _errorMessage != null
-                    ? Text(
-                  _errorMessage!,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
-                )
-                    : _weather != null
-                    ? Column(
-                  children: [
-                    Text(
-                      _weather!.cityName,
-                      style: const TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                  )
+                      : _weather != null
+                      ? Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(16),
                     ),
-                    const SizedBox(height: 10),
-                    Image.network(
-                      "http://openweathermap.org/img/wn/${_weather!.iconCode}@2x.png",
-                      width: 100,
+                    child: Column(
+                      children: [
+                        Text(
+                          _weather!.cityName,
+                          style: const TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Image.network(
+                          "http://openweathermap.org/img/wn/${_weather!.iconCode}@2x.png",
+                          width: 100,
+                        ),
+                        Text(
+                          '${_weather!.temperature.round()}°C',
+                          style: const TextStyle(
+                            fontSize: 50,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          _weather!.mainCondition,
+                          style: const TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.white70,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          'Humidity: ${_weather!.humidity}%',
+                          style: const TextStyle(fontSize: 20, color: Colors.white70),
+                        ),
+                        Text(
+                          'Wind Speed: ${_weather!.windSpeed} m/s',
+                          style: const TextStyle(fontSize: 20, color: Colors.white70),
+                        ),
+                      ],
                     ),
-                    Text(
-                      '${_weather!.temperature.round()}°C',
-                      style: const TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Text(
-                      _weather!.mainCondition,
-                      style: const TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.white70,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      'Humidity: ${_weather!.humidity}%',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        color: Colors.white70,
-                      ),
-                    ),
-                    Text(
-                      'Wind Speed: ${_weather!.windSpeed} m/s',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        color: Colors.white70,
-                      ),
-                    ),
-                  ],
-                )
-                    : Container(),
-              ],
+                  )
+                      : Container(),
+                ],
+              ),
             ),
           ),
         ),
