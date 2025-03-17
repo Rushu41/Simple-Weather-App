@@ -9,8 +9,6 @@ A simple weather app built using Flutter to provide real-time weather informatio
 - **Wind Speed**: Provides current wind speed and wind gusts in km/h or mph.
 - **Weather Conditions**: Visualizes the current weather (e.g., sunny, cloudy, rainy) with corresponding icons.
 - **Daily Forecast**: Displays a daily or hourly forecast with temperature, humidity, and wind conditions.
-- **Sunrise and Sunset**: Provides the times for sunrise and sunset based on the user's location.
-- **Location-Based Updates**: Automatically fetches weather data based on the user's current location or allows manual location input.
 
 ## Getting Started
 
