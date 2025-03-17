@@ -1,16 +1,40 @@
-# weather
+# Weather App - Flutter
 
-A new Flutter project.
+A simple weather app built using Flutter to provide real-time weather information.
+
+## Features
+
+- **Temperature**: Displays the current temperature in both Celsius and Fahrenheit. Includes daily high and low temperatures.
+- **Humidity**: Shows the percentage of humidity, giving users a sense of the air's moisture level.
+- **Wind Speed**: Provides current wind speed and wind gusts in km/h or mph.
+- **Weather Conditions**: Visualizes the current weather (e.g., sunny, cloudy, rainy) with corresponding icons.
+- **Daily Forecast**: Displays a daily or hourly forecast with temperature, humidity, and wind conditions.
+- **Sunrise and Sunset**: Provides the times for sunrise and sunset based on the user's location.
+- **Location-Based Updates**: Automatically fetches weather data based on the user's current location or allows manual location input.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To get started with the app, follow these steps:
 
-A few resources to get you started if this is your first Flutter project:
+### Prerequisites
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Install Flutter SDK: [Flutter Installation Guide](https://flutter.dev/docs/get-started/install)
+- Install Android Studio or Visual Studio Code for development.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/weather-app.git
+
+### Documentation
+For more information, check the official Flutter documentation: Flutter Docs.
+
+### How to Add:
+1. Open your **`README.md`** file in your project directory.
+2. Copy the above code and paste it into your `README.md` file, replacing any previous content if necessary.
+3. Save the file.
+
+This will display the project information, features, and installation instructions properly in Markdown format
+
