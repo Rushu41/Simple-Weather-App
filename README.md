@@ -24,7 +24,7 @@ To get started with the app, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/weather-app.git
+   git clone https://github.com/Rushu41/weather-app.git
 
 ### Documentation
 For more information, check the official Flutter documentation: Flutter Docs.
